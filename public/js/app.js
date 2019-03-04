@@ -5,13 +5,14 @@ $.getJSON("/articles", function(data) {
     // Display the apropos information on the page
     // $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
     var articleCard = $("<div>")
-    articleCard.addClass("articleCard col-sm-6 col-md-4");
+    articleCard.addClass("articleCard col-sm-6 col-md-4 border-dark");
     articleCard.css("width", "18rem");
     
     var cardImg = $("<img>")
     cardImg.addClass("card-img-top mt-3");
     cardImg.attr("src", data[i].imgURL);
     cardImg.attr("alt", data[i].title);
+    cardImg.css("height", "191px");
     
     var cardBody = $("<div>");
     cardBody.addClass("card-body");
@@ -27,28 +28,24 @@ $.getJSON("/articles", function(data) {
 
     var readBtn = $("<a>");
     readBtn.addClass("btn btn-primary");
-    readBtn.attr("href", data[i].link)
-    readBtn.text("Read");
+    readBtn.attr("href", data[i].link);
+    readBtn.attr("target", "_blank");
+    readBtn.text("Read Article");
+
+    var noteBtn = $("<a>");
+    noteBtn.addClass("btn btn-success float-right");
+    noteBtn.attr("href", "#")
+    noteBtn.text("View Notes");
 
     var cardFooter = $("<div>");
     cardFooter.addClass("card-footer text-muted");
     cardFooter.text(data[i].date);
 
     $("#articles").append(articleCard);
-    
-
-
-//             //Adding it all to DOM
-//             thumbnail.append(editBtn);
-//             thumbnail.append(lightBox);
-//             lightBox.append(imgSRC)
-//             thumbnail.append(thumbnailCaption);
-//             thumbnailCaption.append(thumbnailTitle);
-//             thumbnailCaption.append(thumbnailCategory);
-//             thumbnailCaption.append(thumbnailDescription);
-//             thumbnail.data("image", image);
-//             baguetteBox.run('.tz-gallery');
-// }
+    articleCard.append(cardImg).append(cardBody).append(cardFooter);
+    cardBody.append(cardTitle).append(cardText).append(readBtn).append(noteBtn);
+  }
+});
 
 // Whenever someone clicks a p tag
 $(document).on("click", "p", function() {
