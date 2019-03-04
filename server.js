@@ -68,26 +68,32 @@ app.get("/scrape", function(req, res) {
       result.title = $(this).children(".blog_card").children(".blog_card-block").children(".blog_card-title").text();
       result.link = "https://starcraft2.com" + $(this).attr("href");
       result.brief = $(this).children(".blog_card").children(".blog_card-block").children(".blog_card-text").text();
-      console.log(result.brief);
       result.date = $(this).children(".blog_card").children(".blog_card-block").children(".blog_card-meta").text();
       result.imgURL = "http:" + ($(this).children(".blog_card").children(".blog_card-img-top").children(".AspectRatio").children("img").attr("src"));
-      console.log(result)
-      // Create a new Article using the `result` object built from scraping
-      db.Article.create(result)
-        .then(function(dbArticle) {
-          // View the added result in the console
-          console.log(dbArticle);
-        })
-        .catch(function(err) {
-          // If an error occurred, log it
-          console.log(err);
-        });
+      // console.log(result)
+
+      db.Article.countDocuments({"title": result.title}, function(err, count){
+        console.log(count)
+        if (count > 0) {
+          console.log(result.title + " ....Already in Database.")
+        } else {
+          // Create a new Article using the `result` object built from scraping
+            db.Article.create(result)
+            .then(function(dbArticle) {
+              // View the added result in the console
+              console.log(dbArticle);
+            })
+            .catch(function(err) {
+              // If an error occurred, log it
+              console.log(err);
+            });
+        };
+      })
     });
-    
-    setTimeout(function(){  // wait for 2 secs(2)
-      res.redirect('/');   // then reload the page.(3)
-    }, 2000);
   });
+  setTimeout(function(){  // wait for 5 secs(2)
+    res.redirect('/');   // then reload the page.(3)
+  }, 5000);
 });
 
 // Route for getting all Articles from the db
