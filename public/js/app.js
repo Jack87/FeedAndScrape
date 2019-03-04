@@ -5,14 +5,14 @@ $.getJSON("/articles", function(data) {
     // Display the apropos information on the page
     // $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
     var articleCard = $("<div>")
-    articleCard.addClass("articleCard col-sm-6 col-md-4 border-dark");
-    articleCard.css("width", "18rem");
+    articleCard.addClass("articleCard col-sm-6 col-md-4 border-dark mb-2");
+    articleCard.css({"width": "18rem","box-shadow": "0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.9)"});
     
     var cardImg = $("<img>")
     cardImg.addClass("card-img-top mt-3");
     cardImg.attr("src", data[i].imgURL);
     cardImg.attr("alt", data[i].title);
-    cardImg.css("height", "191px");
+    cardImg.css({"height":"191px"});
     
     var cardBody = $("<div>");
     cardBody.addClass("card-body");
@@ -32,9 +32,10 @@ $.getJSON("/articles", function(data) {
     readBtn.attr("target", "_blank");
     readBtn.text("Read Article");
 
-    var noteBtn = $("<a>");
+    var noteBtn = $("<button>");
     noteBtn.addClass("btn btn-success float-right");
-    noteBtn.attr("href", "#")
+    noteBtn.attr("data-toggle", "modal")
+    noteBtn.attr("data-target", ".notes-list-modal")
     noteBtn.text("View Notes");
 
     var cardFooter = $("<div>");

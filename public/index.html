@@ -6,16 +6,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./css/cssReset.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/materia/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Cormorant+SC" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
 </head>
 
   <body>
     <div class="jumbotron">
-          <div class="container">
-            <h1 class="display-3"><i class="fa fa-gamepad" aria-hidden="true"></i>Starcraft 2 Official News</h1>
-            <h3 class=""><i>News, updates and blog posts for Starcraft 2 direct from Blizzard.</i></h3>
+      <div class="container">
+        <h1 class="display-3"><i class="fa fa-gamepad" aria-hidden="true"></i>Starcraft 2 Official News</h1>
+        <h3 class="">
+          <i>News, updates and blog posts for StarCraft 2 direct from Blizzard.</i>
+        </h3>
+        <a href="/scrape" class="btn btn-primary">Scrape SC2 Articles</a> 
+        <a href="/clearAll" class="btn btn-danger float-right">Clear Entire Database</a>
+      </div>
+    </div>
     <div id="wrapper" class="container">
       <div id="articles" class="row">
         <!-- <div class="card col-4 articleCard" style="width: 18rem;">
@@ -23,8 +29,8 @@
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="https://starcraft2.com/en-us/news/22883351" class="btn btn-primary">Go somewhere</a>
-              <a href="https://starcraft2.com/en-us/news/22883351" class="btn btn-primary">Go somewhere</a>
+              <a href="https://starcraft2.com/en-us/news/22883351" class="btn btn-primary">Read Article</a>
+              <button class="btn btn-primary float-right" data-toggle="modal" data-target=".notes-list-modal">View Notes</button>
             </div>
             <div class="card-footer text-muted">
                 2 days ago
@@ -32,8 +38,71 @@
           </div> -->
         </div>            
       </div>
+
+      <div class="modal fade notes-list-modal" tabindex="-1" role="dialog" aria-labelledby="notesList" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="notesList">
+                List of notes:
+              </h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+              </button>
+            </div>
+
+            <button type="button" class="btn btn-info float-right mt-2 mr-4 ml-4 mb-0" data-toggle="modal" data-target="#addNote">
+                <span>+ Add Note</span>
+            </button>
+            <div class="modal-body notesList">
+                <div class="card noteCard mb-2">
+                    <h5 class="card-header noteCard-name">Featured</h5>
+                    <div class="card-body noteCard-body">
+                      <h5 class="card-title noteCard-date">02-18-2019</h5>
+                      <p class="card-text noteCard-text">Notes about article go here</p>
+                      <button href="#" id="noteDelete" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-labelledby="addNewNoteModal" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+              <h5 class="modal-title" id="addNoteTitle">Add New Note</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              </div>
+              <div class="modal-body">
+                  <form>
+                      <div class="form-row">
+                          <div class="col-12">
+                              <label for="name">Name: </label>
+                              <input type="text" class="form-control" id="nameUser" placeholder="Your Name">
+                          </div>
+                      <div class="form-group mt-2 col-12">
+                          <label for="descriptionText">Note/Comment: </label>
+                          <textarea class="form-control" id="descriptionText" rows="4" placeholder="Notes or comments about article"></textarea>
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="addNoteDB" data-dismiss="modal"><i class="fas fa-cloud-upload-alt"></i> Add Note</button>
+              </div>
+          </div>
+          </div>
+      </div>
+
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="./js/app.js"></script>
   </body>
 </html>

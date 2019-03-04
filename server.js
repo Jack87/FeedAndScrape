@@ -43,6 +43,14 @@ mongoose.connect(MONGODB_URI);
 
 // Routes
 
+app.get("/clearAll", function(req,res){
+  db.Article.collection.drop()
+  // res.send("Clear DB Complete");
+  setTimeout(function(){  // wait for 2 secs(2)
+    res.redirect('/');   // then reload the page.(3)
+  }, 2000);
+})
+
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios
@@ -75,9 +83,10 @@ app.get("/scrape", function(req, res) {
           console.log(err);
         });
     });
-
-    // Send a message to the client
-    res.send("Scrape Complete");
+    
+    setTimeout(function(){  // wait for 2 secs(2)
+      res.redirect('/');   // then reload the page.(3)
+    }, 2000);
   });
 });
 
